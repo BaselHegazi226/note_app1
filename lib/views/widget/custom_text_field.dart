@@ -6,17 +6,18 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     this.textInput = TextInputType.text,
     this.obscureText = false,
-    required this.paddingSpace,
+    this.maxLines = 1,
   });
 
   final String hintText;
   bool obscureText;
   TextInputType textInput;
   //TextEditingController controller = TextEditingController();
-  final double paddingSpace;
+  final int maxLines;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLines: maxLines,
       //  controller: controller,
       obscureText: obscureText,
       // onSubmitted: (data) {
@@ -35,7 +36,6 @@ class CustomTextField extends StatelessWidget {
         enabledBorder: outlineInputBorder(),
         disabledBorder: outlineInputBorder(),
         focusedBorder: outlineInputBorder(color: Colors.white),
-        contentPadding: EdgeInsets.symmetric(vertical: paddingSpace),
       ),
     );
   }

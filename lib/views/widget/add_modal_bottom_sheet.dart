@@ -9,17 +9,29 @@ class AddModalBottomSheet extends StatelessWidget {
     return Container(
       color: Colors.black45,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+        padding: const EdgeInsets.symmetric(
+          vertical: 32,
+          horizontal: 16,
+        ),
         child: Column(
           children: [
             CustomTextField(
-              paddingSpace: 0,
               hintText: 'Title',
+              maxLines: 2,
+            ),
+            const SizedBox(
+              height: 16,
             ),
             CustomTextField(
-              paddingSpace: 70,
               hintText: 'content',
+              maxLines: 7,
             ),
+            const SizedBox(
+              height: 16,
+            ),
+            CustomButton(
+              onPressed: () {},
+            )
           ],
         ),
       ),
