@@ -1,77 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:note_app1/views/view/edit_note_view.dart';
+
+import 'note_item_body.dart';
 
 class NoteItem extends StatelessWidget {
-  NoteItem({super.key, required this.onPressed});
+  const NoteItem({
+    super.key,
+  });
 
-  VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.only(
-          top: 24,
-          left: 16,
-          bottom: 16,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.green.withOpacity(.5),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            ListTile(
-              contentPadding: const EdgeInsets.all(8),
-              title: const Text(
-                'Basel Hegazi',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                  fontFamily: 'assets/fonts/rubik/Rubik-ExtraBold.ttf',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              subtitle: Padding(
-                padding: const EdgeInsets.only(
-                  top: 8,
-                  bottom: 8,
-                  right: 16,
-                ),
-                child: Text(
-                  'Build you career with basel hegazi',
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(.5),
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.delete_outline,
-                  color: Colors.black,
-                  size: 32,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                right: 16,
-              ),
-              child: Text(
-                '${DateTime.now().timeZoneName}, ${DateTime.now().hour % 11}:${DateTime.now().minute}',
-                style: TextStyle(
-                  color: Colors.black.withOpacity(.5),
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return const EditNoteView();
+            },
+          ),
+        );
+      },
+      child: const NoteItemBody(),
     );
   }
 }
