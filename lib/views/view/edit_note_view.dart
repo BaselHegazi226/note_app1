@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widget/edit_note_view_body.dart';
+import '../widget/item_body/edit_note_view_body.dart';
 
 class EditNoteView extends StatelessWidget {
   static String id = 'edit note view';
