@@ -27,7 +27,7 @@ class AddModalBottomSheet extends StatelessWidget {
                 ),
                 CustomTextField(
                   hintText: 'content',
-                  maxLines: 7,
+                  maxLines: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 32),
