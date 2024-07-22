@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:note_app1/views/view/edit_note_view.dart';
 import 'package:note_app1/views/view/note_view.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  var box = await Hive.openBox('note');
   runApp(const NoteApp());
 }
 
