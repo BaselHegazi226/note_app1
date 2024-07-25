@@ -9,8 +9,10 @@ class NoteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff1D1B20),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.white,
+        elevation: 500,
         onPressed: () {
           showModalBottomSheet(
             context: context,
@@ -21,6 +23,8 @@ class NoteView extends StatelessWidget {
         },
         child: const Icon(
           Icons.add,
+          color: Color(0xff1D1B20),
+          weight: 150,
         ),
       ),
       body: const NoteViewBody(),
