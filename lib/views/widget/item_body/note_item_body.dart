@@ -16,7 +16,7 @@ class NoteItemBody extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: const Color(0xffFCCC80).withOpacity(.7),
+        color: Color(noteModel.color).withOpacity(.7),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -60,7 +60,7 @@ class NoteItemBody extends StatelessWidget {
               right: 16,
             ),
             child: Text(
-              '${DateTime.now().timeZoneName}, ${DateTime.now().hour % 11}:${DateTime.now().minute}',
+              noteModel.dateTime,
               style: TextStyle(
                 color: Colors.black.withOpacity(.5),
                 fontSize: 18,
