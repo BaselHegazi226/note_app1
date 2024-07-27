@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:note_app1/models/note_model.dart';
 
 class NoteItemBody extends StatelessWidget {
-  const NoteItemBody({super.key});
+  const NoteItemBody({super.key, required this.noteModel});
+  final NoteModel noteModel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,9 @@ class NoteItemBody extends StatelessWidget {
         children: [
           ListTile(
             contentPadding: const EdgeInsets.all(8),
-            title: const Text(
-              'Basel Hegazi',
-              style: TextStyle(
+            title: Text(
+              noteModel.title,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 24,
                 fontFamily: 'assets/fonts/rubik/Rubik-ExtraBold.ttf',
@@ -37,7 +39,7 @@ class NoteItemBody extends StatelessWidget {
                 right: 16,
               ),
               child: Text(
-                'Build you career with basel hegazi',
+                noteModel.subTitle,
                 style: TextStyle(
                   color: Colors.black.withOpacity(.5),
                   fontSize: 20,
