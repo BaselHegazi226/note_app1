@@ -8,14 +8,17 @@ class CustomTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.maxLines = 1,
     this.onSaved,
+    this.textEditingController,
+    this.onChanged,
   });
 
   final String hintText;
   bool obscureText;
   TextInputType textInput;
   void Function(String?)? onSaved;
-  final int maxLines;
-
+  int maxLines;
+  TextEditingController? textEditingController;
+  void Function(String)? onChanged;
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
 }
@@ -38,6 +41,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           });
         }
       },
+      onChanged: widget.onChanged,
       onSaved: widget.onSaved,
       maxLines: widget.maxLines,
       obscureText: widget.obscureText,

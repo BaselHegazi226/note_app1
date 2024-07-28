@@ -5,6 +5,7 @@ import 'package:note_app1/cubits/add_cubit/add_note_cubit.dart';
 import 'package:note_app1/cubits/add_cubit/add_note_state.dart';
 import 'package:note_app1/views/widget/custom/custom_snack_bar.dart';
 
+import '../../../cubits/notes_cubit/note_cubit.dart';
 import '../custom/add_note_form.dart';
 
 class AddModalBottomSheet extends StatelessWidget {
@@ -19,24 +20,21 @@ class AddModalBottomSheet extends StatelessWidget {
           if (state is AddNoteFailureState) {
             showSnackBar(context, 'error :${state.errorMessage}');
           } else if (state is AddNoteSuccessState) {
-            showSnackBar(context, 'add note is Successful');
+            showSnackBar(context, 'Add note is successful');
+            BlocProvider.of<NoteCubit>(context).fetchAllNotes();
             Navigator.pop(context);
           }
         },
         builder: (context, state) {
-          return AbsorbPointer(
-            //when the modalProgressHud is loading is stopped any thing on the screen
-            absorbing: state is AddNoteLoadingState ? true : false,
-            child: ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoadingState,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 32,
-                  horizontal: 16,
-                ),
-                child: SingleChildScrollView(
-                  child: AddNoteForm(),
-                ),
+          return ModalProgressHUD(
+            inAsyncCall: state is AddNoteLoadingState ? true : false,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 32,
+                horizontal: 16,
+              ),
+              child: SingleChildScrollView(
+                child: AddNoteForm(),
               ),
             ),
           );

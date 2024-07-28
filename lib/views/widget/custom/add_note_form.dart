@@ -16,7 +16,7 @@ class AddNoteForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      autovalidateMode: autoValidator,
       child: Column(
         children: [
           CustomTextFormField(
@@ -44,7 +44,7 @@ class AddNoteForm extends StatelessWidget {
                   formKey.currentState!.save();
                   var currentDate = DateTime.now();
                   var formattedCurrentDate =
-                      DateFormat().add_yMMMEd().format(currentDate);
+                      DateFormat('yyyy dd MMMM : HH').format(currentDate);
                   var note = NoteModel(
                     title: title!,
                     subTitle: subTitle!,
@@ -52,6 +52,8 @@ class AddNoteForm extends StatelessWidget {
                     color: Colors.blue.value,
                   );
                   BlocProvider.of<AddNoteCubit>(context).addNote(note);
+                } else {
+                  autoValidator = AutovalidateMode.always;
                 }
               },
             ),

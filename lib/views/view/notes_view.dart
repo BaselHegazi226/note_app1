@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import '../widget/item/add_modal_bottom_sheet.dart';
 import '../widget/item_body/note_view_body.dart';
 
-class NoteView extends StatelessWidget {
-  const NoteView({super.key});
+class NotesView extends StatelessWidget {
+  const NotesView({super.key});
   static String id = 'note view';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color(0xff1D1B20),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
-        elevation: 500,
+        //elevation: 500,
         onPressed: () {
           showModalBottomSheet(
             context: context,
@@ -27,7 +28,7 @@ class NoteView extends StatelessWidget {
           weight: 150,
         ),
       ),
-      body: const NoteViewBody(),
+      body: const NotesViewBody(),
     );
   }
 }
