@@ -12,7 +12,7 @@ class AddNoteForm extends StatefulWidget {
   AddNoteForm({super.key});
   GlobalKey<FormState> formKey = GlobalKey();
   String? title, subTitle;
-  AutovalidateMode autoValidator = AutovalidateMode.disabled;
+  //AutovalidateMode autoValidator = AutovalidateMode.disabled;
 
   @override
   State<AddNoteForm> createState() => _AddNoteForm();
@@ -23,7 +23,7 @@ class _AddNoteForm extends State<AddNoteForm> {
   Widget build(BuildContext context) {
     return Form(
       key: widget.formKey,
-      autovalidateMode: widget.autoValidator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
           CustomTextFormField(
@@ -64,13 +64,13 @@ class _AddNoteForm extends State<AddNoteForm> {
     if (widget.formKey.currentState!.validate()) {
       widget.formKey.currentState!.save();
       var currentDate = DateTime.now();
-      var hour = DateTime.now().hour - 11;
+      var hour = DateTime.now().hour;
       String time = 'pm';
       if (DateTime.now().hour <= 11) {
         time = 'am';
       }
       var formattedCurrentDate =
-          DateFormat('dd MMMM yyyy : $hour: mm').format(currentDate);
+          DateFormat('dd MMMM yyyy : ${hour + 1}: mm').format(currentDate);
       var note = NoteModel(
         title: widget.title!,
         subTitle: widget.subTitle!,
@@ -78,8 +78,6 @@ class _AddNoteForm extends State<AddNoteForm> {
         color: Colors.blue.value,
       );
       BlocProvider.of<AddNoteCubit>(context).addNote(note);
-    } else {
-      widget.autoValidator = AutovalidateMode.always;
     }
   }
 }
