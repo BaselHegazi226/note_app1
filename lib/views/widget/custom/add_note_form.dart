@@ -4,62 +4,82 @@ import 'package:intl/intl.dart';
 import 'package:note_app1/models/note_model.dart';
 
 import '../../../cubits/add_cubit/add_note_cubit.dart';
+import '../item/color_list_view.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
 
-class AddNoteForm extends StatelessWidget {
+class AddNoteForm extends StatefulWidget {
+  AddNoteForm({super.key});
   GlobalKey<FormState> formKey = GlobalKey();
   String? title, subTitle;
   AutovalidateMode autoValidator = AutovalidateMode.disabled;
 
   @override
+  State<AddNoteForm> createState() => _AddNoteForm();
+}
+
+class _AddNoteForm extends State<AddNoteForm> {
+  @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
-      autovalidateMode: autoValidator,
+      key: widget.formKey,
+      autovalidateMode: widget.autoValidator,
       child: Column(
         children: [
           CustomTextFormField(
-            onSaved: (value) {
-              title = value;
-            },
             hintText: 'Title',
             maxLines: 2,
+            onSaved: (value) {
+              widget.title = value;
+            },
           ),
           const SizedBox(
             height: 16,
           ),
           CustomTextFormField(
-            onSaved: (value) {
-              subTitle = value;
-            },
             hintText: 'Content',
             maxLines: 7,
+            onSaved: (value) {
+              widget.subTitle = value;
+            },
           ),
+          const SizedBox(
+            height: 8,
+          ),
+          const ColorListView(),
           Padding(
             padding: const EdgeInsets.only(top: 32),
             child: CustomButton(
               onTap: () async {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-                  var currentDate = DateTime.now();
-                  var formattedCurrentDate =
-                      DateFormat('yyyy dd MMMM : HH').format(currentDate);
-                  var note = NoteModel(
-                    title: title!,
-                    subTitle: subTitle!,
-                    dateTime: formattedCurrentDate,
-                    color: Colors.blue.value,
-                  );
-                  BlocProvider.of<AddNoteCubit>(context).addNote(note);
-                } else {
-                  autoValidator = AutovalidateMode.always;
-                }
+                validateButton(context);
               },
             ),
           ),
         ],
       ),
     );
+  }
+
+  void validateButton(BuildContext context) {
+    if (widget.formKey.currentState!.validate()) {
+      widget.formKey.currentState!.save();
+      var currentDate = DateTime.now();
+      var hour = DateTime.now().hour - 11;
+      String time = 'pm';
+      if (DateTime.now().hour <= 11) {
+        time = 'am';
+      }
+      var formattedCurrentDate =
+          DateFormat('dd MMMM yyyy : $hour: mm').format(currentDate);
+      var note = NoteModel(
+        title: widget.title!,
+        subTitle: widget.subTitle!,
+        dateTime: '$formattedCurrentDate $time',
+        color: Colors.blue.value,
+      );
+      BlocProvider.of<AddNoteCubit>(context).addNote(note);
+    } else {
+      widget.autoValidator = AutovalidateMode.always;
+    }
   }
 }

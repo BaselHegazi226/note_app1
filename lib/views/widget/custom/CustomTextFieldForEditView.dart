@@ -8,6 +8,7 @@ class CustomTextFieldForEditView extends StatefulWidget {
     this.textEditingController,
     this.onChanged,
     required this.labelText,
+    this.labelColor = Colors.white,
   });
 
   final String hintText;
@@ -15,6 +16,7 @@ class CustomTextFieldForEditView extends StatefulWidget {
   TextEditingController? textEditingController;
   void Function(String)? onChanged;
   final String labelText;
+  final Color labelColor;
 
   @override
   _CustomTextFieldForEditViewState createState() =>
@@ -35,8 +37,8 @@ class _CustomTextFieldForEditViewState
       ),
       decoration: InputDecoration(
         labelText: widget.labelText,
-        labelStyle: const TextStyle(
-          color: Colors.blue,
+        labelStyle: TextStyle(
+          color: widget.labelColor,
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),

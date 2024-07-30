@@ -5,6 +5,7 @@ import 'package:note_app1/models/note_model.dart';
 import '../../../cubits/notes_cubit/note_cubit.dart';
 import '../custom/CustomTextFieldForEditView.dart';
 import '../custom/custom_app_bar.dart';
+import '../item/color_list_view.dart';
 
 class EditNoteViewBody extends StatefulWidget {
   const EditNoteViewBody({super.key, required this.noteModel});
@@ -65,6 +66,7 @@ class _EditNoteViewBody extends State<EditNoteViewBody> {
             ),
             CustomTextFieldForEditView(
               labelText: 'Title',
+              labelColor: Color(widget.noteModel.color),
               onChanged: (value) {
                 title = value;
               },
@@ -77,12 +79,19 @@ class _EditNoteViewBody extends State<EditNoteViewBody> {
             ),
             CustomTextFieldForEditView(
               labelText: 'SubTitle',
+              labelColor: Color(widget.noteModel.color),
               onChanged: (value) {
                 subTitle = value;
               },
               textEditingController: textEditingControllerSubTitle,
               hintText: 'Content',
               maxLines: 10,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            EditColorListView(
+              noteModel: widget.noteModel,
             ),
           ],
         ),
