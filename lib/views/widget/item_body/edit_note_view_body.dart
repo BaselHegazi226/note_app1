@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app1/models/note_model.dart';
+import 'package:note_app1/views/widget/custom/custom_snack_bar.dart';
 
 import '../../../cubits/notes_cubit/note_cubit.dart';
 import '../custom/CustomTextFieldForEditView.dart';
 import '../custom/custom_app_bar.dart';
-import '../item/color_list_view.dart';
+import '../item/edit_color_list_view.dart';
 
 class EditNoteViewBody extends StatefulWidget {
   const EditNoteViewBody({super.key, required this.noteModel});
@@ -50,6 +51,8 @@ class _EditNoteViewBody extends State<EditNoteViewBody> {
               height: 54,
             ),
             CustomAppBar(
+              title: 'Edit Note',
+              iconData: Icons.check,
               onPressed: () {
                 widget.noteModel.title = title ?? widget.noteModel.title;
                 widget.noteModel.subTitle =
@@ -57,9 +60,8 @@ class _EditNoteViewBody extends State<EditNoteViewBody> {
                 widget.noteModel.save();
                 BlocProvider.of<NoteCubit>(context).fetchAllNotes();
                 Navigator.pop(context);
+                showSnackBar(context, 'Edit success');
               },
-              iconData: Icons.check,
-              title: 'Edit Note',
             ),
             const SizedBox(
               height: 32,
@@ -69,6 +71,7 @@ class _EditNoteViewBody extends State<EditNoteViewBody> {
               labelColor: Color(widget.noteModel.color),
               onChanged: (value) {
                 title = value;
+                setState(() {});
               },
               textEditingController: textEditingControllerTitle,
               hintText: 'Title',
